@@ -215,9 +215,6 @@ public class PriorityQueue<E> extends AbstractQueue<E> implements Serializable
   //删除指定位置的元素，比找到插入位置更复杂。
   void remove(int index)
   {
-    // Remove the element at INDEX.  We do this by finding the least
-    // child and moving it into place, then iterating until we reach
-    // the bottom of the tree.
     //移除指定下标的元素的逻辑：反复从左右子节点中找出小的那一个，
     //放到当前位置，直至树的叶子节点。
     while (storage[index] != null)
@@ -279,3 +276,9 @@ public class PriorityQueue<E> extends AbstractQueue<E> implements Serializable
   }
 }
 ```
+##总结
+用普通的数组，做出了优先队列的功能。可见最普通的食材，也能做出最高级的菜肴，全看厨师是否高明。
+
+源码注释中说是使用了binomial heap（二项堆），根据资料二项堆是由多个二叉树构成，从源码上看不出这一点。所有的操作都是针对一棵二叉树来做的，没有多个二叉树合并的逻辑，二叉堆应该是binary heap。
+
+插入和删除操作都会涉及是否提升子节点的问题，假定元素个数为n，则树高$log(n)$，因此，插入和删除操作的时间复杂都是$log(n)$。
