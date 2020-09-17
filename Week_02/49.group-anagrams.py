@@ -38,6 +38,10 @@ class Solution:
             chars = [0] * 26
             for c in s:
                 chars[ord(c) - ord('a')] += 1
+            //如果将其转换成字符串作为key，则可能出现不同单词有相同key的情形
+            //如：[["bbbbbbbbbbc"],["bdddddddddd"]]
+            //key=010100000000000000000000000
+            //key=010100000000000000000000000
             key = tuple(chars)
             table.setdefault(key, []).append(s)
         return list(table.values())
