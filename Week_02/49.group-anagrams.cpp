@@ -31,6 +31,11 @@
  * 
  * 
  */
+#include <unordered_map>
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
@@ -45,6 +50,7 @@ public:
             for (auto c : chars) {
                 key += c;
             }
+            cout << key << endl;
             m[key].push_back(s);
         }
         vector<vector<string>> result;
@@ -54,3 +60,10 @@ public:
         return result;
     }
 };
+
+int main() {
+    Solution s;
+    vector<string> strs{"bbbbbbbbbbc", "bdddddddddd"};
+    s.groupAnagrams(strs);
+    return 0;
+}
