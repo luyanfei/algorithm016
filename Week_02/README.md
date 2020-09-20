@@ -43,3 +43,28 @@ public:
 ### 优先队列实现滑动窗口最大值问题
 用优先队列实现滑动窗口最大值问题，覃超老师的视频中使用的Java语言，Java的PriorityQueue很特别，有API直接移除非顶部元素，滑动窗口问题用PriorityQueue来解决，其实是利用了这一点。换用C++来实现时，就会碰到大坑。首先STL中的priority_queue不支持对非顶部元素的操作，因此，可以考虑用multiset，而multiset的erase方法是重载过的，如果像Java一样来用，会把所有相同值的元素全部删除，必须先使用find，然后再erase。
 
+## HashMap笔记
+HashMap的代码实在繁杂，只能读个大概出来。
+
+### initialCapacity和loadFactor
+initialCapacity为初始Node数组的大小，默认为16，也可在构建时指定。loadFactor默认为0.75，若容量为128，则条目的数量达到96时，HashMap对象就会启动resize过程，扩充容量。
+
+### Node bin与TreeNode bin
+bin的原义是箱，用在这里表示hashcode相同的元素会被塞到同一个箱子里的情形。当箱子里的元素达到8个(TREEIFY_THRESHOLD)时，会将Node转换成TreeNode。TreeNode的容量差不多是Node的两倍，转换成TreeNode的目的就是为了应对极端的情形（如碰撞较多），一般情况下，使用者不用太操心这种情形。
+
+### 数据存储的原理
+真正用于存储数据的其实是一个Node数组：
+```
+transient Node<K,V>[] table;
+```
+往HashMap中添加元素时，作为key的hashcode与数组下标的对应关系是下面的式子：
+```
+(n - 1) & hash
+```
+其中n即为数组的长度，hash为key的hashcode。n只能取2的倍数，以2^8=256为例，n-1的值会是255，二进制角度下会是16个1（低位），与hashcode作位与运算，相当于取出低16位。也就是说hashcode的低16位取出来的整数即是该key所对应的数组中的下标位置，也是放数组的地方。
+
+这种映射会带来rehash的高成本。当容量再扩大一倍，从hashcode中取出的数字多了一位，每个Node的位置都可能发生变化，这意味着扩容就意味着大家都得挪位置，resize的实现也比较复杂。
+
+
+
+
