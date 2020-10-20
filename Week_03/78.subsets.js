@@ -36,7 +36,5 @@
  * @return {number[][]}
  */
 var subsets = function(nums) {
-    return nums.reduce(function(acc, val) {
-        return acc.concat(acc.map(v => v.concat([val])))
-    }, [[]])
+    return nums.reduce((acc, val) => acc.concat(acc.map(v => v.concat([val]))), [[]])
 };
