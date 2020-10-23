@@ -55,5 +55,5 @@ var maxProfit = function(prices) {
         dp1[1] = Math.max(dp1[1], dp0[1] - prices[i])
         dp0[2] = Math.max(dp0[2], dp1[1] + prices[i])
     }
-    return Math.max(dp0[1], dp0[2])
+    return dp0[2]
 };
