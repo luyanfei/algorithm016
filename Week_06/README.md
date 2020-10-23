@@ -1,4 +1,4 @@
-** 188. 买卖股票的最佳时机 IV
+-- 188. 买卖股票的最佳时机 IV
 [题目链接](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
 
 在第三次做这题时，我写出下面的代码，结果是错的。为什么会错？
@@ -29,7 +29,7 @@
 ```
 已完成j次交易且持有股票的状态，依赖于完成j次交易且不持有股票的状态。而不是依赖于完成j-1次交易且不持持胡股票的状态。每轮内循环要推导完成一次交易的状态。
 
-** 32.最长有效括号
+-- 32.最长有效括号
 [题目链接](https://leetcode-cn.com/problems/longest-valid-parentheses/)
 
 推导状态转移方程分两部分，其中最近字符为"()"的情形比较容易理解。而另一种情形却令我困惑了好久。
@@ -46,7 +46,7 @@ dp[i] = dp[i - 1] + dp[i - dp[i - dp[i - 1] - 2] + 2
 
 dp[i]的含义是以s[i]为结束的最长有效括号子串长度，其中“最长”两字的含义里就包括了s[i-dp[i-1]-1]=')'的情形，因此在程序中是不必判断这种情况的。
 
-** 123. 买卖股票的最佳时机 III
+-- 123. 买卖股票的最佳时机 III
 [题目链接](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
 采用JavaScript来实现，先定义状态数组：
 ```
@@ -85,7 +85,7 @@ for (let i = 1; i < prices.length; i++) {
 }
 ```
 
-** 518. 零钱兑换 II
+-- 518. 零钱兑换 II
 [题目链接](https://leetcode-cn.com/problems/coin-change-2/)
 
 正确和错误只有内外循环的次序。下面是我多次写出，而又是错误的方案：
