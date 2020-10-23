@@ -27,7 +27,7 @@
     }
     return dp0[k];
 ```
-已完成j次交易且持有股票的状态，依赖于完成j次交易且不持有股票的状态。而不是依赖于完成j-1次交易且不持持胡股票的状态。每轮内循环要推导完成一次交易的状态。
+已完成j次交易且持有股票的状态，依赖于完成j次交易且不持有股票的状态。而不是依赖于完成j-1次交易且不持有股票的状态。每轮内循环要推导出完成一次交易的状态变化。
 
 ## 32.最长有效括号
 [题目链接](https://leetcode-cn.com/problems/longest-valid-parentheses/)
@@ -89,7 +89,7 @@ for (let i = 1; i < prices.length; i++) {
 ## 518. 零钱兑换 II
 [题目链接](https://leetcode-cn.com/problems/coin-change-2/)
 
-正确和错误只有内外循环的次序。下面是我多次写出，而又是错误的方案：
+正确和错误只在于内外循环的次序。下面是我多次写出，而又是错误的方案：
 ```
 def change(self, amount: int, coins: List[int]) -> int:
     dp = [0] * (amount + 1)
