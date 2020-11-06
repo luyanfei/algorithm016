@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=363 lang=cpp
+ * @lc app=leetcode.cn id=363 lang=java
  *
  * [363] 矩形区域不超过 K 的最大数值和
  *
@@ -29,29 +29,28 @@
  * 
  */
 class Solution {
-public:
-    int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
-        if (matrix.size() == 0) return 0;
-        int height = matrix.size(), width = matrix[0].size(), result = INT_MIN;
-        for (int left = 0; left < width; left++) {
-            vector<int> sums(height, 0);
-            for (int right = left; right < width; right++) {
-                for (int i = 0; i < height; i++) {
-                    sums[i] += matrix[i][right];
+    public int maxSumSubmatrix(int[][] matrix, int k) {
+        int height = matrix.length, width = matrix[0].length;
+        int result = Integer.MIN_VALUE;
+        for (int i = 0; i < width; i++) {
+            int[] subs = new int[height];
+            for (int j = i; j < width; j++) {
+                for (int t = 0; t < height; t++) {
+                    subs[t] += matrix[t][j];
                 }
-                set<int> s;
-                s.insert(0);
+                TreeSet<Integer> set = new TreeSet<>();
+                set.add(0);
                 int acc = 0;
-                for (int sum : sums) {
-                    acc += sum;
-                    auto it = s.lower_bound(acc - k);
-                    if (it != s.end()) {
-                        result = max(result, acc - *it);
+                for (int t = 0; t < height; t++) {
+                    acc += subs[t];
+                    Integer ceiling = set.ceiling(acc - k);
+                    if (ceiling != null) {
+                        result = Math.max(acc - ceiling, result);
                     }
-                    s.insert(acc);
+                    set.add(acc);
                 }
             }
         }
         return result;
     }
-};
+}
