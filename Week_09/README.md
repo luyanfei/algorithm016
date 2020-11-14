@@ -1,6 +1,6 @@
 ## 不同路径II的状态转移方程
 若obstacleGrid[i][j]=1，则有：  
-f(i,j) = 0
+f(i,j) = 0  
 若obstacleGrid[i][j]=0，则有：  
 f(i,j) = f(i-1,j) + f(i, j-1)
 
